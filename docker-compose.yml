@@ -1,6 +1,18 @@
 version: '3'
 
 services:
+  unit-test:
+    image: golang:1.13
+    network_mode: host
+    depends_on:
+      - accountapi
+      - postgresql
+      - vault
+    volumes:
+      - .:/usr/src/myapp
+      - /tmp/go:/go
+    working_dir: /usr/src/myapp
+    command: bash -c "go test ./..."
   accountapi:
     image: form3tech/interview-accountapi:v1.0.0-4-g63cf8434
     restart: on-failure
@@ -40,10 +52,3 @@ services:
     environment:
       - SKIP_SETCAP=1
       - VAULT_DEV_ROOT_TOKEN_ID=8fb95528-57c6-422e-9722-d2147bcba8ed
-  unit:
-    image: golang:1.13
-    volumes:
-      - .:/usr/src/myapp
-      - /tmp/go:/go
-    working_dir: /usr/src/myapp
-    command: bash -c "pwd"
