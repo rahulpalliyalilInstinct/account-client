@@ -5,7 +5,7 @@ This go library contains clients that talk to fake account api service of Form3
 ## How to use it?
 
 A detailed explanation on usage is provided in the example directory. You can use the client
-to call the ```Create``` , ```Fetch```, ```List``` and ```Delete``` apis . Filtering is yet to be implemented.
+to call the ```Create``` , ```Fetch```, ```List``` and ```Delete``` apis .
 
 ## Reference
 
