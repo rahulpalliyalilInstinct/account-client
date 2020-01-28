@@ -2,6 +2,8 @@ package listing
 
 import "time"
 
+// Accounts consists of a collection of data and links.
+// Links will have next and previous links to pages.
 type Accounts struct {
 	Data  []Data     `json:"data"`
 	Links Navigation `json:"links"`

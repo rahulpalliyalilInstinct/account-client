@@ -27,6 +27,10 @@ func NewService(client AccountApiClient) *Service {
 	}
 }
 
+// DeleteAccount deletes a specified account. If there is no
+// id specified then accountIDNotSpecifiedErrMsg is returned
+// if version is not specified the defaultVersion(0) is used
+// to delete the record.
 func (s *Service) DeleteAccount(account Account) error {
 	if account.ID == "" {
 		return errors.New(accountIDNotSpecifiedErrMsg)

@@ -53,6 +53,8 @@ type AccountClient struct {
 	endpoint   *url.URL
 }
 
+// NewClient provides a new accountClient.If there is no address
+// of the accountapi specified, then the default address is used.
 func NewClient(timeoutInSeconds int, cfg Config) (*AccountClient, error) {
 	if cfg.Address == "" {
 		cfg.Address = defaultAddress
@@ -67,9 +69,12 @@ func NewClient(timeoutInSeconds int, cfg Config) (*AccountClient, error) {
 	return &AccountClient{
 		endpoint:   u,
 		httpClient: &http.Client{},
+		timeout:    time.Second * time.Duration(timeoutInSeconds),
 	}, nil
 }
 
+// Create creates an account. if creation fails then a non nil error
+// is returned.
 func (c *AccountClient) Create(account registering.Account) error {
 	bodyBytes, err := json.Marshal(account)
 	if err != nil {
@@ -88,6 +93,8 @@ func (c *AccountClient) Create(account registering.Account) error {
 	return nil
 }
 
+// Delete deletes an account. if deletion fails then a non nil error
+// is returned.
 func (c *AccountClient) Delete(account deregistering.Account) error {
 	endpointUrl := c.endpoint.String() + account.ID
 	req, err := http.NewRequest("DELETE", endpointUrl, nil)
@@ -105,6 +112,8 @@ func (c *AccountClient) Delete(account deregistering.Account) error {
 	return nil
 }
 
+// Fetch gets an account , given the accountId. If an invalid
+// id is provided, then a non nil error is returned.
 func (c *AccountClient) Fetch(id string) (*listing.Account, error) {
 	account := &listing.Account{}
 	endpointUrl := c.endpoint.String() + id
@@ -125,6 +134,8 @@ func (c *AccountClient) Fetch(id string) (*listing.Account, error) {
 	return account, nil
 }
 
+// List lists the accounts based on the page number and page size.
+// An error is returned , if there is a failure in retrieving the accounts.
 func (c *AccountClient) List(page listing.Page) (*listing.Accounts, error) {
 	accounts := &listing.Accounts{}
 	req, err := http.NewRequest("GET", c.endpoint.String(), nil)
