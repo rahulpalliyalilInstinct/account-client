@@ -1,4 +1,4 @@
-# Golang Client Library for Form3 fake account APIs
+# Golang Client Library for Form3 Fake Account APIs
 
 This go library contains clients that talk to fake account api service of Form3
 
