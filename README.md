@@ -17,3 +17,7 @@ to call the ```Create``` , ```Fetch```, ```List``` and ```Delete``` apis . Filte
    - https://github.com/stretchr/testify
    - https://github.com/h2non/gock
    - https://github.com/DATA-DOG/godog
+
+## Developed by
+
+   Rahul Madathum Palliyalil   
