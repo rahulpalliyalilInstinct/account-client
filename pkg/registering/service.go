@@ -16,18 +16,18 @@ type UniqueIdentifier interface {
 	Generator() string
 }
 
-// AccountApiClient interface consists of Create method which creates/registers an account.
-type AccountApiClient interface {
+// AccountAPIClient interface consists of Create method which creates/registers an account.
+type AccountAPIClient interface {
 	Create(account Account) error
 }
 
 type Service struct {
-	httpClient AccountApiClient
+	httpClient AccountAPIClient
 	identifier UniqueIdentifier
 }
 
 // NewService creates a  registering service with the necessary dependencies
-func NewService(client AccountApiClient, identifier UniqueIdentifier) *Service {
+func NewService(client AccountAPIClient, identifier UniqueIdentifier) *Service {
 	if client == nil || identifier == nil {
 		return nil
 	}

@@ -7,18 +7,18 @@ const (
 	invalidPageSizeSpecifiedErrMsg = "failed to provide valid page size, (page size should be greater than 0)"
 )
 
-// AccountApiClient interface consists of Fetch and Get methods which fetches an account / lists multiple accounts.
-type AccountApiClient interface {
+// AccountAPIClient interface consists of Fetch and Get methods which fetches an account / lists multiple accounts.
+type AccountAPIClient interface {
 	Fetch(id string) (*Account, error)
 	List(page Page) (*Accounts, error)
 }
 
 type Service struct {
-	httpClient AccountApiClient
+	httpClient AccountAPIClient
 }
 
 // NewService creates a  listing service with the necessary dependencies
-func NewService(client AccountApiClient) *Service {
+func NewService(client AccountAPIClient) *Service {
 	if client == nil {
 		return nil
 	}

@@ -1,4 +1,4 @@
-package behaviour_tests
+package behaviour
 
 import (
 	"os"

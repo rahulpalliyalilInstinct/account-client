@@ -1,17 +1,17 @@
 package uuid
 
 import (
-	"github.com/satori/go.uuid"
+	uuid "github.com/satori/go.uuid"
 )
 
-type uniqueIdentifier struct{}
+type UniqueIdentifier struct{}
 
-// NewUniqueIdentifier returns a uniqueIdentifier
-func NewUniqueIdentifier() *uniqueIdentifier {
-	return &uniqueIdentifier{}
+// NewUniqueIdentifier returns a UniqueIdentifier
+func NewUniqueIdentifier() *UniqueIdentifier {
+	return &UniqueIdentifier{}
 }
 
 // NewV4 returns random generated canonical string representation of UUID.
-func (u *uniqueIdentifier) Generator() string {
+func (u *UniqueIdentifier) Generator() string {
 	return uuid.NewV4().String()
 }

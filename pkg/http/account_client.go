@@ -15,6 +15,7 @@ import (
 	"account-client/pkg/deregistering"
 	"account-client/pkg/listing"
 	"account-client/pkg/registering"
+
 	"github.com/pkg/errors"
 )
 
@@ -24,7 +25,7 @@ const (
 	fetchAccountReqFailedErrMsg  = "fetch account request failed"
 	listAccountsReqFailedErrMsg  = "list accounts request failed"
 
-	accountsApi    = "/v1/organisation/accounts/"
+	accountsAPI    = "/v1/organisation/accounts/"
 	defaultAddress = "http://localhost:8080"
 )
 
@@ -64,7 +65,7 @@ func NewClient(timeoutInSeconds int, cfg Config) (*AccountClient, error) {
 		return nil, err
 	}
 	u.Path = strings.TrimRight(u.Path, "/")
-	u.Path += accountsApi
+	u.Path += accountsAPI
 
 	return &AccountClient{
 		endpoint:   u,
@@ -96,8 +97,8 @@ func (c *AccountClient) Create(account registering.Account) error {
 // Delete deletes an account. if deletion fails then a non nil error
 // is returned.
 func (c *AccountClient) Delete(account deregistering.Account) error {
-	endpointUrl := c.endpoint.String() + account.ID
-	req, err := http.NewRequest("DELETE", endpointUrl, nil)
+	endpointURL := c.endpoint.String() + account.ID
+	req, err := http.NewRequest("DELETE", endpointURL, nil)
 	if err != nil {
 		return nil
 	}
@@ -112,12 +113,12 @@ func (c *AccountClient) Delete(account deregistering.Account) error {
 	return nil
 }
 
-// Fetch gets an account , given the accountId. If an invalid
+// Fetch gets an account , given the accountID. If an invalid
 // id is provided, then a non nil error is returned.
 func (c *AccountClient) Fetch(id string) (*listing.Account, error) {
 	account := &listing.Account{}
-	endpointUrl := c.endpoint.String() + id
-	req, err := http.NewRequest("GET", endpointUrl, nil)
+	endpointURL := c.endpoint.String() + id
+	req, err := http.NewRequest("GET", endpointURL, nil)
 	if err != nil {
 		return nil, err
 	}

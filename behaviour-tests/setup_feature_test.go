@@ -1,4 +1,4 @@
-package behaviour_tests
+package behaviour
 
 import (
 	"github.com/DATA-DOG/godog"
@@ -30,5 +30,4 @@ func FeatureContext(s *godog.Suite) {
 	s.Step(`^I am able to see my first account in page (\d+) and second account in page (\d+)$`, testListClient.iAmAbleToSeeMyFirstAccountInPageAndSecondAccountInPage)
 
 	s.Step(`^I am able to see my account  "([^"]*)" details$`, testFetchClient.iAmAbleToSeeMyAccountDetails)
-
 }

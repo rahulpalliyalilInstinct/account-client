@@ -6,6 +6,7 @@ import (
 	"testing"
 
 	"account-client/pkg/registering"
+
 	"github.com/stretchr/testify/assert"
 )
 
@@ -28,7 +29,7 @@ func (t *testUniqueIdentifier) Generator() string {
 func TestNewService(t *testing.T) {
 	t.Parallel()
 	type fields struct {
-		client     registering.AccountApiClient
+		client     registering.AccountAPIClient
 		identifier registering.UniqueIdentifier
 	}
 	tests := []struct {
@@ -76,7 +77,7 @@ func TestService_CreateAccount(t *testing.T) {
 	t.Parallel()
 	expectedErrMsg := "something bad happened"
 	type fields struct {
-		client     registering.AccountApiClient
+		client     registering.AccountAPIClient
 		identifier registering.UniqueIdentifier
 	}
 	type args struct {
@@ -135,5 +136,4 @@ func TestService_CreateAccount(t *testing.T) {
 			}
 		})
 	}
-
 }

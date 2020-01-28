@@ -7,9 +7,9 @@ type Page struct {
 }
 
 // NewPage returns a page with page number and size.
-func NewPage(Number, Size int) *Page {
+func NewPage(number, size int) *Page {
 	return &Page{
-		Number: Number,
-		Size:   Size,
+		Number: number,
+		Size:   size,
 	}
 }

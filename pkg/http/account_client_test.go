@@ -9,6 +9,7 @@ import (
 	"account-client/pkg/http"
 	"account-client/pkg/listing"
 	"account-client/pkg/registering"
+
 	"github.com/stretchr/testify/assert"
 	"gopkg.in/h2non/gock.v1"
 )
@@ -156,7 +157,7 @@ func TestAccountClient_Delete(t *testing.T) {
 }
 
 func TestAccountClient_Fetch(t *testing.T) {
-	expectedID := "some id"
+	const expectedID = "some id"
 	expectedAccount := `{
   "data": {
     "id": "some id",
