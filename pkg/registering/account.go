@@ -1,5 +1,6 @@
 package registering
 
+// Account consists of data necessary for creating/registering an account.
 type Account struct {
 	Data `json:"data"`
 }

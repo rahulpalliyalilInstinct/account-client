@@ -37,6 +37,13 @@ func NewService(client AccountApiClient, identifier UniqueIdentifier) *Service {
 	}
 }
 
+// CreateAccount creates/registers a given account.
+// If the specified account has empty country code, then
+// an error is returned.If the organisation id is not
+// specified then a new organisation id(uuid) is created
+// and will be used to create an account. If the account classification
+// is not specified, then `Personal` type is taken by default.
+// The account type name is specified as accounts.
 func (s *Service) CreateAccount(account Account) error {
 	if account.Attributes.Country == "" {
 		return errors.New(countryCodeNotSpecifiedErrMsg)

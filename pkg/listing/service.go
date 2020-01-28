@@ -7,7 +7,7 @@ const (
 	invalidPageSizeSpecifiedErrMsg = "failed to provide valid page size, (page size should be greater than 0)"
 )
 
-// AccountApiClient interface consists of Fetch and Get methods which fetches an account / lists multiple accounts an account.
+// AccountApiClient interface consists of Fetch and Get methods which fetches an account / lists multiple accounts.
 type AccountApiClient interface {
 	Fetch(id string) (*Account, error)
 	List(page Page) (*Accounts, error)
@@ -27,6 +27,8 @@ func NewService(client AccountApiClient) *Service {
 	}
 }
 
+// GetAccount fetches an account by taking a valid account id.
+// If an empty id is specified, then an error is returned.
 func (s *Service) GetAccount(id string) (*Account, error) {
 	if id == "" {
 		return nil, errors.New(accountIDNotSpecifiedErrMsg)
@@ -38,6 +40,8 @@ func (s *Service) GetAccount(id string) (*Account, error) {
 	return account, nil
 }
 
+// GetAccounts , gets a list of accounts based on page number and size.
+// If an invalid page size is specified, an error is returned.
 func (s *Service) GetAccounts(page Page) (*Accounts, error) {
 	if page.Size <= 0 {
 		return nil, errors.New(invalidPageSizeSpecifiedErrMsg)
