@@ -6,6 +6,7 @@ import (
 	"testing"
 
 	"account-client/pkg/deregistering"
+
 	"github.com/stretchr/testify/assert"
 )
 
@@ -20,7 +21,7 @@ func (t *testAccountClient) Delete(account deregistering.Account) error {
 func TestNewService(t *testing.T) {
 	t.Parallel()
 	type fields struct {
-		client deregistering.AccountApiClient
+		client deregistering.AccountAPIClient
 	}
 	tests := []struct {
 		name          string
@@ -55,7 +56,7 @@ func TestService_CreateAccount(t *testing.T) {
 	t.Parallel()
 	expectedErrMsg := "something bad happened"
 	type fields struct {
-		client deregistering.AccountApiClient
+		client deregistering.AccountAPIClient
 	}
 	type args struct {
 		id string
@@ -98,5 +99,4 @@ func TestService_CreateAccount(t *testing.T) {
 			}
 		})
 	}
-
 }

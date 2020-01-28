@@ -1,4 +1,4 @@
-package behaviour_tests
+package behaviour
 
 import (
 	"fmt"
@@ -10,24 +10,24 @@ import (
 	"account-client/pkg/registering"
 )
 
-type testDeRegisterAccountClient struct {
+type TestDeRegisterAccountClient struct {
 	account    deregistering.Account
 	client     *http.AccountClient
 	identifier *testIdentifier
 }
 
-func NewTestDeRegisterClient() *testDeRegisterAccountClient {
+func NewTestDeRegisterClient() *TestDeRegisterAccountClient {
 	client, err := http.NewClient(int(5*time.Second), http.Config{})
 	if err != nil {
 		return nil
 	}
-	return &testDeRegisterAccountClient{
+	return &TestDeRegisterAccountClient{
 		client:     client,
 		identifier: &testIdentifier{},
 	}
 }
 
-func (t *testDeRegisterAccountClient) aNewRegisteredAccountWithCountryCode(id, countryCode string) error {
+func (t *TestDeRegisterAccountClient) aNewRegisteredAccountWithCountryCode(id, countryCode string) error {
 	account := registering.Account{
 		Data: registering.Data{
 			ID: id,
@@ -44,7 +44,7 @@ func (t *testDeRegisterAccountClient) aNewRegisteredAccountWithCountryCode(id, c
 	return nil
 }
 
-func (t *testDeRegisterAccountClient) iSendARequestToDeregisterTheAccount() error {
+func (t *TestDeRegisterAccountClient) iSendARequestToDeregisterTheAccount() error {
 	t.account = deregistering.Account{
 		ID: t.identifier.id,
 	}
@@ -52,7 +52,7 @@ func (t *testDeRegisterAccountClient) iSendARequestToDeregisterTheAccount() erro
 	return service.DeleteAccount(t.account)
 }
 
-func (t *testDeRegisterAccountClient) iAmAbleToSeeMyAccountDeregistered() error {
+func (t *TestDeRegisterAccountClient) iAmAbleToSeeMyAccountDeregistered() error {
 	service := listing.NewService(t.client)
 	account, err := service.GetAccount(t.account.ID)
 	if account == nil {

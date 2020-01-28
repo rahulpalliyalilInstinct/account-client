@@ -6,6 +6,7 @@ import (
 	"testing"
 
 	"account-client/pkg/listing"
+
 	"github.com/stretchr/testify/assert"
 )
 
@@ -26,7 +27,7 @@ func (t *testAccountClient) List(page listing.Page) (*listing.Accounts, error) {
 func TestNewService(t *testing.T) {
 	t.Parallel()
 	type fields struct {
-		client listing.AccountApiClient
+		client listing.AccountAPIClient
 	}
 	tests := []struct {
 		name          string
@@ -62,14 +63,14 @@ func TestNewService(t *testing.T) {
 
 func TestService_GetAccount(t *testing.T) {
 	t.Parallel()
-	expectedErrMsg := "something bad happened"
+	const expectedErrMsg = "something bad happened"
 	expectedAccount := listing.Account{
 		Data: listing.Data{
 			ID:   "some id",
 			Type: "some Type",
 		}}
 	type fields struct {
-		client listing.AccountApiClient
+		client listing.AccountAPIClient
 	}
 	type args struct {
 		id string
@@ -130,7 +131,7 @@ func TestService_GetAccounts(t *testing.T) {
 			Type: "some Type",
 		}}}
 	type fields struct {
-		client listing.AccountApiClient
+		client listing.AccountAPIClient
 	}
 	type args struct {
 		page listing.Page

@@ -1,7 +1,6 @@
 package main
 
 import (
-	"fmt"
 	"time"
 
 	"account-client/pkg/deregistering"
@@ -21,7 +20,7 @@ func main() {
 	for i := 0; i < 2; i++ {
 		uniqueIdentifier := uuid.NewUniqueIdentifier()
 		service := registering.NewService(client, uniqueIdentifier)
-		if err := service.CreateAccount(registering.Account{registering.Data{Attributes: registering.Attributes{Country: "GB"}}}); err != nil {
+		if err = service.CreateAccount(registering.Account{Data: registering.Data{Attributes: registering.Attributes{Country: "GB"}}}); err != nil {
 			return
 		}
 	}
@@ -30,15 +29,15 @@ func main() {
 	listingService := listing.NewService(client)
 	count := 0
 	for {
-		accounts, err := listingService.GetAccounts(*listing.NewPage(count, 1))
-		if err != nil {
-			fmt.Println(err)
+		accounts, listingErr := listingService.GetAccounts(*listing.NewPage(count, 1))
+		if listingErr != nil {
+			return
 		}
 		if accounts.Links.Next == "" {
 			id = accounts.Data[0].ID
 			break
 		}
-		count += 1
+		count++
 	}
 
 	// example for fetching an account
@@ -48,8 +47,10 @@ func main() {
 	}
 	// example for deregistering/removing an account
 	deRegService := deregistering.NewService(client)
-	deRegService.DeleteAccount(deregistering.Account{
+	err = deRegService.DeleteAccount(deregistering.Account{
 		ID: account.Data.ID,
 	})
-
+	if err != nil {
+		return
+	}
 }

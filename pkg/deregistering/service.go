@@ -8,17 +8,17 @@ const (
 	defaultVersion = "0"
 )
 
-// AccountApiClient interface consists of Delete method which deletes/deregisters an account.
-type AccountApiClient interface {
+// AccountAPIClient interface consists of Delete method which deletes/deregisters an account.
+type AccountAPIClient interface {
 	Delete(account Account) error
 }
 
 type Service struct {
-	httpClient AccountApiClient
+	httpClient AccountAPIClient
 }
 
 // NewService creates a  deregistering service with the necessary dependencies
-func NewService(client AccountApiClient) *Service {
+func NewService(client AccountAPIClient) *Service {
 	if client == nil {
 		return nil
 	}
